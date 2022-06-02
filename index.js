@@ -2,21 +2,21 @@ var numberOfButtons = document.querySelectorAll(".drum").length;
 
 for (var i = 0; i < numberOfButtons; i++) {
 
+    // Detecting Button press
     document.querySelectorAll(".drum")[i].addEventListener("click", function() {
         var buttonInnerHTML = this.innerHTML;
 
-        // Detecting Button press
         makeSound(buttonInnerHTML);
+        buttonFlashAnimation(buttonInnerHTML);
 
     });
 }
 
+// Detecting Keyboard press
 document.addEventListener("keydown", function(event) {
-
-    // Detecting Keyboard press
     makeSound(event.key);
+    buttonFlashAnimation(event.key);
 })
-
 
 function makeSound(key) {
     switch (key) {
@@ -59,4 +59,17 @@ function makeSound(key) {
             console.log(this);
             break;
     }
+}
+
+// Make current button flash when clicked/pressed
+function buttonFlashAnimation(currentKey) {
+    var activeButton = document.querySelector("." + currentKey);
+
+    activeButton.classList.add("pressed");
+
+    setTimeout(function() {
+        activeButton.classList.remove("pressed");
+
+    }, 100)
+
 }
